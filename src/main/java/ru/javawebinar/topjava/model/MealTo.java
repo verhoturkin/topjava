@@ -12,6 +12,10 @@ public class MealTo {
 
     private final boolean excess;
 
+    public int getId() {
+        return id.get();
+    }
+
     private final AtomicInteger id;
 
     public MealTo(LocalDateTime dateTime, String description, int calories, boolean excess, int id) {

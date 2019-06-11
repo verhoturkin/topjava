@@ -14,16 +14,6 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toList;
 
 public class MealsUtil {
-    public static void main(String[] args) {
-        List<Meal> meals = MealsMock.get();
-
-        List<MealTo> mealsWithExcess = getFilteredWithExcess(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
-        mealsWithExcess.forEach(System.out::println);
-
-        System.out.println(getFilteredWithExcessByCycle(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
-        System.out.println(getFilteredWithExcessInOnePass(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
-        System.out.println(getFilteredWithExcessInOnePass2(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
-    }
 
     public static List<MealTo> getFilteredWithExcess(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         Map<LocalDate, Integer> caloriesSumByDate = meals.stream()
