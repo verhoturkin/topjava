@@ -29,6 +29,7 @@ public class MealServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         String forward = "";
         String action = req.getParameter("action");
 
@@ -58,6 +59,7 @@ public class MealServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         String description = req.getParameter("description");
         int calories = Integer.parseInt(req.getParameter("calories"));
         LocalDateTime dateTime = LocalDate.parse(req.getParameter("date")).atTime(LocalTime.parse(req.getParameter("time")));
