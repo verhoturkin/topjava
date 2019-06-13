@@ -7,6 +7,7 @@ import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.util.MealsUtil;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import java.util.Objects;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+@WebServlet(urlPatterns = "/meals", name = "mealServlet")
 public class MealServlet extends HttpServlet {
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd");
     private static final int CALLORIES = 2000;
