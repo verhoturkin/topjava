@@ -43,7 +43,7 @@
             <td align="center">
                 <input name="calories" value="${meal.calories}" type="number">
             </td>
-            <td><input type="submit"></td>
+            <td><input type="submit" value="CONFIRM"></td>
         </tr>
         </tbody>
     </table>

@@ -31,13 +31,29 @@
             </td>
             <td align="center">${meal.description}</td>
             <td align="center">${meal.calories}</td>
-            <td><a href="meals?action=edit&id=${meal.id}">EDIT</a></td>
-            <td><a href="meals?action=delete&id=${meal.id}">DELETE</a></td>
+            <td>
+                <form action="meals" method="get">
+                    <input hidden name="action" value="edit">
+                    <input hidden name="id" value="${meal.id}">
+                    <input type="submit" value="EDIT">
+                </form>
+            </td>
+            <td valign="center">
+                <form action="meals" method="get">
+                    <input hidden name="action" value="delete">
+                    <input hidden name="id" value="${meal.id}">
+                    <input type="submit" value="DELETE">
+                </form>
+            </td>
         </tr>
     </c:forEach>
     </c:if>
     </tbody>
 </table>
-<a href="meals?action=add">ADD MEAL</a>
+<form action=meals method=get>
+    <input hidden name="action" value="add">
+    <input type=submit value=ADD>
+</form>
+<%--<a href="meals?action=add">ADD MEAL</a>--%>
 </body>
 </html>
