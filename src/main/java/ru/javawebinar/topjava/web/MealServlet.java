@@ -21,8 +21,6 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 public class MealServlet extends HttpServlet {
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd");
-    private static final String ADD_OR_EDIT = "edit.jsp";
-    private static final String MEAL_LIST = "meals.jsp";
     private static final int CALLORIES = 2000;
     private static final Logger log = getLogger(MealServlet.class);
     private static final MealDAO dao = new MealDAOMapImpl();
@@ -30,31 +28,28 @@ public class MealServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        String forward = "";
         String action = req.getParameter("action");
 
         if (Objects.equals(action, "delete")) {
             int id = Integer.parseInt(req.getParameter("id"));
             dao.delete(id);
-            forward = MEAL_LIST;
-            req.setAttribute("meals", MealsUtil.getFilteredWithExcess(dao.getAll(), LocalTime.MIN, LocalTime.MAX, CALLORIES));
+            resp.sendRedirect("meals");
             log.debug("forward to meals");
 
         } else if (Objects.equals(action, "edit")) {
-            forward = ADD_OR_EDIT;
             int id = Integer.parseInt(req.getParameter("id"));
             Meal meal = dao.getById(id);
             req.setAttribute("meal", meal);
+            req.getRequestDispatcher("edit.jsp").forward(req, resp);
 
         } else if (Objects.equals(action, "add")) {
-            forward = ADD_OR_EDIT;
+            req.getRequestDispatcher("edit.jsp").forward(req, resp);
 
         } else {
             req.setAttribute("meals", MealsUtil.getFilteredWithExcess(dao.getAll(), LocalTime.MIN, LocalTime.MAX, CALLORIES));
-            forward = MEAL_LIST;
+            req.getRequestDispatcher("meals.jsp").forward(req, resp);
         }
 
-        req.getRequestDispatcher(forward).forward(req, resp);
     }
 
     @Override
@@ -73,7 +68,6 @@ public class MealServlet extends HttpServlet {
             meal.setId(Integer.parseInt(id));
             dao.update(meal);
         }
-        req.setAttribute("meals", MealsUtil.getFilteredWithExcess(dao.getAll(), LocalTime.MIN, LocalTime.MAX, CALLORIES));
-        req.getRequestDispatcher(MEAL_LIST).forward(req, resp);
+        resp.sendRedirect("meals");
     }
 }
