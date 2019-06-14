@@ -17,6 +17,8 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
+import static ru.javawebinar.topjava.web.SecurityUtil.*;
+
 public class MealServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(MealServlet.class);
 
@@ -36,7 +38,8 @@ public class MealServlet extends HttpServlet {
         Meal meal = new Meal(id.isEmpty() ? null : Integer.valueOf(id),
                 LocalDateTime.parse(request.getParameter("dateTime")),
                 request.getParameter("description"),
-                Integer.parseInt(request.getParameter("calories")));
+                Integer.parseInt(request.getParameter("calories")),
+                authUserId());
 
         log.info(meal.isNew() ? "Create {}" : "Update {}", meal);
         repository.save(meal);
