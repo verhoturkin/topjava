@@ -13,7 +13,6 @@ import java.time.LocalTime;
 import java.util.List;
 
 import static ru.javawebinar.topjava.util.DateTimeUtil.isBetween;
-import static ru.javawebinar.topjava.util.MealsUtil.createWithExcess;
 import static ru.javawebinar.topjava.util.MealsUtil.getWithExcess;
 import static ru.javawebinar.topjava.util.ValidationUtil.assureIdConsistent;
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNew;
@@ -34,15 +33,15 @@ public class MealRestController {
     }
 
     //TODO rewrite this shit
-    public List<MealTo> getFilteredByDateTime(LocalDate dateMin, LocalDate dateMax, LocalTime timeMin, LocalTime timeMax) {
+    public List<MealTo> getFilteredByDateTime(String dateFrom, String dateTo, String timeFrom, String timeTo) {
         log.info("get filtered meals");
         return getWithExcess(service.getFiltered(authUserId(), meal -> {
-            return isBetween(meal.getTime(),
-                    timeMin == null ? LocalTime.MIN : timeMin,
-                    timeMax == null ? LocalTime.MAX : timeMax)
-                    && isBetween(meal.getDate(),
-                    dateMin == null ? LocalDate.MIN : dateMin,
-                    dateMax == null ? LocalDate.MAX : dateMax);
+            return isBetween(meal.getDate(),
+                    (dateFrom == null || dateFrom == "") ? LocalDate.MIN : LocalDate.parse(dateFrom),
+                    (dateTo == null || dateTo == "") ? LocalDate.MAX : LocalDate.parse(dateTo))
+                    && isBetween(meal.getTime(),
+                    (timeFrom == null || timeFrom == "") ? LocalTime.MIN : LocalTime.parse(timeFrom),
+                    (timeTo == null || timeTo == "") ? LocalTime.MAX : LocalTime.parse(timeTo));
         }), authUserCaloriesPerDay());
     }
 
@@ -51,15 +50,15 @@ public class MealRestController {
         service.delete(id, authUserId());
     }
 
-    public MealTo get(int id) {
+    public Meal get(int id) {
         log.info("get meal {}", id);
-        return createWithExcess(service.get(id, authUserId()), false);
+        return service.get(id, authUserId());
     }
 
-    public MealTo create(Meal meal) {
+    public Meal create(Meal meal) {
         log.info("create {}", meal);
         checkNew(meal);
-        return createWithExcess(service.create(meal, authUserId()), false);
+        return service.create(meal, authUserId());
     }
 
     public void update(Meal meal, int id) {

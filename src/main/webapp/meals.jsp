@@ -21,6 +21,34 @@
     <h3><a href="index.html">Home</a></h3>
     <hr/>
     <h2>Meals</h2>
+    <a>Filter</a>
+    <form method="get" action="meals">
+        <input hidden name="action" value="filter">
+        <table border="0" cellpadding="8" cellspacing="0">
+
+            <thead>
+            <tr>
+                <th align="left">From date</th>
+                <th align="left">To date</th>
+                <th></th>
+                <th align="left">From time</th>
+                <th align="left">To time</th>
+            </tr>
+            </thead>
+            <tr>
+                <td><input type="date" name="dateFrom" value="${param.get("dateFrom")}" ></td>
+                <td><input type="date" name="dateTo" value="${param.get("dateTo")}"></td>
+                <td width="100"></td>
+                <td><input type="time" name="timeFrom" value="${param.get("timeFrom")}"></td>
+                <td><input type="time" name="timeTo" value="${param.get("timeTo")}"></td>
+            </tr>
+        </table>
+        <button type="submit">Filter</button>
+    </form>
+    <form method="get" action="meals">
+        <button type=submit>Reset</button>
+    </form>
+    <hr/>
     <a href="meals?action=create">Add Meal</a>
     <br><br>
     <table border="1" cellpadding="8" cellspacing="0">

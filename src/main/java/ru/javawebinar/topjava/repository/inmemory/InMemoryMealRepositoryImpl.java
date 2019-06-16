@@ -37,9 +37,10 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
             return meal;
         }
         // treat case: update, but absent in storage
-        if (repository.containsKey(meal.getId()) && Objects.equals(repository.get(meal.getId()).getUserId(), userId))
+        if (repository.containsKey(meal.getId()) && Objects.equals(repository.get(meal.getId()).getUserId(), userId)) {
+            meal.setUserId(userId);
             return repository.computeIfPresent(meal.getId(), (id, oldMeal) -> meal);
-        else return null;
+        } else return null;
     }
 
     @Override
