@@ -60,6 +60,7 @@ public abstract class MealServiceTest {
                 "\n---------------------------------" +
                 results +
                 "\n---------------------------------");
+        results = new StringBuilder();
     }
 
     @Autowired
