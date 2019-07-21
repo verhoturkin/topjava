@@ -23,6 +23,11 @@ public class JpaUserRepository implements UserRepository {
     }
 */
 
+    @Override
+    public User getWithMeals(int id) {
+        return null;
+    }
+
     @PersistenceContext
     private EntityManager em;
 

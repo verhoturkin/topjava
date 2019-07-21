@@ -17,6 +17,11 @@ import static ru.javawebinar.topjava.UserTestData.USER;
 @Repository
 public class InMemoryUserRepository extends InMemoryBaseRepository<User> implements UserRepository {
 
+    @Override
+    public User getWithMeals(int id) {
+        return null;
+    }
+
     public void init() {
         entryMap.clear();
         entryMap.put(UserTestData.USER_ID, USER);

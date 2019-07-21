@@ -20,4 +20,7 @@ public interface MealRepository {
 
     // ORDERED dateTime desc
     List<Meal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId);
+
+    // null if meal do not belong to userId
+    Meal getWithUser(int id, int userId);
 }

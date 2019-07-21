@@ -44,10 +44,10 @@ public abstract class UserServiceTest {
     private static StringBuilder results = new StringBuilder();
 
     @Autowired
-    private UserService service;
+    protected UserService service;
 
     @Autowired
-    private CacheManager cacheManager;
+    protected CacheManager cacheManager;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

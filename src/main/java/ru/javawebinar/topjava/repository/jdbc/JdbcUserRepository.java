@@ -22,6 +22,11 @@ public class JdbcUserRepository implements UserRepository {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    @Override
+    public User getWithMeals(int id) {
+        return null;
+    }
+
     private final SimpleJdbcInsert insertUser;
 
     @Autowired
