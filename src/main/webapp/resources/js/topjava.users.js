@@ -1,4 +1,12 @@
 // $(document).ready(function () {
+function switchEnabled(id){
+    $.ajax({
+        type:"POST",
+        url:"ajax/admin/users/enable/" + id,
+        data: {enabled: $('#userEnable').prop('checked')}
+    }).done($.get("ajax/admin/users/", updateTableByData));
+}
+
 $(function () {
     makeEditable({
             ajaxUrl: "ajax/admin/users/",
