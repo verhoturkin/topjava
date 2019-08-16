@@ -10,11 +10,10 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class MealTo extends BaseTo implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class MealTo extends BaseTo {
 
     @NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @DateTimeFormat(pattern= "yyyy-MM-dd HH:mm")
     private LocalDateTime dateTime;
 
     @NotBlank
@@ -75,8 +74,8 @@ public class MealTo extends BaseTo implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MealTo that = (MealTo) o;
-        return calories == that.calories &&
-                excess == that.excess &&
+        return excess == that.excess &&
+                Objects.equals(calories, that.calories) &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(dateTime, that.dateTime) &&
                 Objects.equals(description, that.description);
