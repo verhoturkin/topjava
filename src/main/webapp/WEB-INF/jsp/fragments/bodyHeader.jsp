@@ -20,7 +20,7 @@
                                 <a class="btn btn-info mr-1" href="users"><spring:message code="user.title"/></a>
                             </sec:authorize>
                             <a class="btn btn-info mr-1" href="profile"><sec:authentication property="principal.userTo.name"/> <spring:message code="app.profile"/></a>
-                            <button class="btn btn-primary my-1" type="submit">
+                            <button class="btn btn-primary btn-lg" type="submit">
                                 <span class="fa fa-sign-out"></span>
                             </button>
                         </form:form>
@@ -29,7 +29,7 @@
                         <form:form class="form-inline my-2" id="login_form" action="spring_security_check" method="post">
                             <input class="form-control mr-1" type="text" placeholder="Email" name="username">
                             <input class="form-control mr-1" type="password" placeholder="Password" name="password">
-                            <button class="btn btn-success" type="submit">
+                            <button class="btn btn-lg btn-success" type="submit">
                                 <span class="fa fa-sign-in"></span>
                             </button>
                         </form:form>
